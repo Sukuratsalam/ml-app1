@@ -17,10 +17,13 @@ def predict():
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
-
+    if prediction == 1:
+        answer = "The patient has Heart disease Attack"
+    else:
+        answer = "The patient does not have Heart disease Attack"
    
 
-    return render_template('index.html', prediction_text= "Where 1 represent Presence  and 0 represent  Absence of Heart Disease Attack, \n The Heart Disease Attack Status is {} ".format(prediction))
+    return render_template('index.html', prediction_text=  answer)
 
 if __name__ == "__main__":
     app.run(debug=True)
